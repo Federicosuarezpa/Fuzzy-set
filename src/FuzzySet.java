@@ -39,6 +39,16 @@ public class FuzzySet extends ListSet {
         }
     }
 
+    public boolean containsAll(FuzzySet otherSet)
+    {
+        boolean container = false;
+        if (super.containsAll(otherSet.getSetClass()) && this.degreeValue.containsAll(otherSet.getDegreeValue()))
+        {
+            container = true;
+        }
+        return container;
+    }
+
     public boolean addAll(FuzzySet values)
     {
         Iterator<Integer> iteratorInteger = values.iterator();
@@ -64,6 +74,8 @@ public class FuzzySet extends ListSet {
 
                 if(valueOriginal <= floatValue && valueOriginal > 0.0)
                 {
+                    /*Here we can check visualy if our results are good,because we'll see the values that are identical
+                    * and which degree we got, should be always the min*/
                     System.out.println("Value:" + integerValue + " degree:" + valueOriginal + " " +"Value 2:" +
                             integerValue + " degree 2:" + floatValue);
 
@@ -86,6 +98,10 @@ public class FuzzySet extends ListSet {
         this.degreeValue = newFuzzyset.degreeValue;
 
         return someInterception;
+    }
+
+    public ArrayList<Float> getDegreeValue() {
+        return degreeValue;
     }
 
     public String toString ()
